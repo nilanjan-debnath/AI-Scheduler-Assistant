@@ -1,0 +1,37 @@
+#chatNav{
+    height: 4rem;
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: calc(100% - 4rem);
+}
+#chatContainer{
+    width: 100%;
+    height: calc(100% - 3rem);
+    overflow: auto;
+}
+#input{
+    background-color: blue;
+    height: 3rem;
+    width: 100%;
+}
+#input>form{
+    padding: 0 1rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#text_input{
+    height: 2rem;
+    width: calc(95% - 6rem);
+}
+#send_button{
+    padding: 0.5rem;
+    height: 2rem;
+    width: 6rem;
+}

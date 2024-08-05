@@ -1,0 +1,27 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'CSS/chat.css' %}">
+</head>
+<body>
+    <div id="chatNav">
+        <h2>Scheduler Assistant</h2>
+    </div>
+    <div id="main">
+        <div id="chatContainer">
+            {% for chat in chats %}
+            <div class="chat">
+                <div class="user"> {{chat.user}} </div>
+                <div class="ai"></div>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="input">
+            <form action="/input" method="post">
+                {% csrf_token %}
+                <input id="text_input" type="text" name="input">
+                <button id="send_button" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    </main>
+</body>

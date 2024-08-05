@@ -1,7 +1,48 @@
 {% load static %}
+{% load toggle_filter %}
 <head>
     <link rel="stylesheet" href="{% static 'CSS/table.css' %}">
 </head>
 <body>
-    
+    <nav id="tableNav">
+        <h2>Schedule Preview</h2>
+    </nav>
+    <div id="tableMain">
+        <div id="tableContainer">
+            <table>
+                <tr id="header">
+                    <!-- <th>Toggle</th> -->
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Name</th>
+                    <th>Subject</th>
+                </tr>
+                {% with toggle_val=True %}
+                {% for item in items %}
+                {% if toggle_val %}
+                <tr id="item" style="background-color: #F3EEEA;">
+                    <!-- <td> {{ toggle_val }} </td> -->
+                    <td> {{ item.date }} </td>
+                    <td> {{ item.start }} </td>
+                    <td> {{ item.end }} </td>
+                    <td> {{ item.name }} </td>
+                    <td> {{ item.subject }} </td>
+                </tr>
+                {% else %}
+                <tr id="item">
+                    <!-- <td> {{ toggle_val }} </td> -->
+                    <td> {{ item.date }} </td>
+                    <td> {{ item.start }} </td>
+                    <td> {{ item.end }} </td>
+                    <td> {{ item.name }} </td>
+                    <td> {{ item.subject }} </td>
+                </tr>
+                {% endif %}
+                {% toggle 'toggle_val' %}
+                {% endfor %}
+                {% endwith %}
+            </table>
+        </div>
+    </div>
 </body>

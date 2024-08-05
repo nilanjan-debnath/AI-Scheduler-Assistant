@@ -12,12 +12,12 @@ html, body{
   /* flex-direction: row; */
 }
 #chatBox{
-  background-color: rgb(201, 197, 192);
-  width: 70%;
+  background-color: #F3EEEA;
+  width: 60%;
   height: 100dvh;
 }
 #tableBox{
-  background-color: aqua;
-  width: 30%;
+  background-color: #EBE3D5;
+  width: 40%;
   height: 100dvh;
 }

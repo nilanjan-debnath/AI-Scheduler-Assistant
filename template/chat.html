@@ -3,25 +3,32 @@
     <link rel="stylesheet" href="{% static 'CSS/chat.css' %}">
 </head>
 <body>
-    <div id="chatNav">
+    <nav id="chatNav">
         <h2>Scheduler Assistant</h2>
-    </div>
-    <div id="main">
+    </nav>
+    <div id="chatMain">
         <div id="chatContainer">
             {% for chat in chats %}
             <div class="chat">
-                <div class="user"> {{chat.user}} </div>
-                <div class="ai"></div>
+                <div class="user chatText"><pre>{{chat.user}}</pre></div>
+                <div class="ai chatText"><pre>{{chat.ai}}</pre></div>
             </div>
             {% endfor %}
         </div>
-        <div id="input">
+        <div id="chatInput">
             <form action="/input" method="post">
                 {% csrf_token %}
-                <input id="text_input" type="text" name="input">
+                <input id="text_input" type="text" name="input" autocomplete="off" required>
                 <button id="send_button" type="submit">Send</button>
             </form>
         </div>
     </div>
     </main>
+    <script>
+        function scrollToBottom() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        scrollToBottom();
+    </script>
 </body>

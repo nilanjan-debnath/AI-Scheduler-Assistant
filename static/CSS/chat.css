@@ -1,37 +1,84 @@
-#chatNav{
-    height: 4rem;
+nav {
+  height: 4rem;
+  background-color: #776b5d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#main{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: calc(100% - 4rem);
+nav > h2 {
+  color: white;
+  font-size: 2.5rem;
 }
-#chatContainer{
-    width: 100%;
-    height: calc(100% - 3rem);
-    overflow: auto;
+#chatMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100% - 4rem);
 }
-#input{
-    background-color: blue;
-    height: 3rem;
-    width: 100%;
+#chatContainer {
+  width: 80%;
+  height: calc(100% - 3rem);
+  overflow: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
-#input>form{
-    padding: 0 1rem;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
 }
-#text_input{
-    height: 2rem;
-    width: calc(95% - 6rem);
+.chatText {
+  padding: 0.25rem;
+  display: flex;
 }
-#send_button{
-    padding: 0.5rem;
-    height: 2rem;
-    width: 6rem;
+.chatText > pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+.user {
+  justify-content: end;
+}
+.user > pre {
+  background-color: #b0a695;
+}
+.ai {
+  justify-content: start;
+}
+.ai > pre {
+  background-color: #ebe3d5;
+}
+#chatInput {
+  background-color: #b0a695;
+  height: 3rem;
+  width: 100%;
+}
+#chatInput > form {
+  padding: 0 1rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#text_input {
+  background-color: #f3eeea;
+  height: 2rem;
+  width: calc(95% - 6rem);
+  border-radius: 0.5rem;
+  border: 0;
+}
+#send_button {
+  padding: 0.5rem;
+  height: 2rem;
+  width: 6rem;
+  border-radius: 0.5rem;
+  border: 0;
 }

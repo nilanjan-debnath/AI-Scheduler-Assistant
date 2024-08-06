@@ -16,27 +16,27 @@
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Name</th>
-                    <th>Subject</th>
+                    <th>Topic</th>
                 </tr>
                 {% with toggle_val=True %}
                 {% for item in items %}
                 {% if toggle_val %}
-                <tr id="item" style="background-color: #F3EEEA;">
+                <tr id="item" style="background-color: #CDE8E5;">
                     <!-- <td> {{ toggle_val }} </td> -->
                     <td> {{ item.date }} </td>
-                    <td> {{ item.start }} </td>
-                    <td> {{ item.end }} </td>
-                    <td> {{ item.name }} </td>
-                    <td> {{ item.subject }} </td>
+                    <td> {{ item.start_time }} </td>
+                    <td> {{ item.end_time }} </td>
+                    <td> {{ item.user_name }} </td>
+                    <td> {{ item.topic }} </td>
                 </tr>
                 {% else %}
                 <tr id="item">
                     <!-- <td> {{ toggle_val }} </td> -->
                     <td> {{ item.date }} </td>
-                    <td> {{ item.start }} </td>
-                    <td> {{ item.end }} </td>
-                    <td> {{ item.name }} </td>
-                    <td> {{ item.subject }} </td>
+                    <td> {{ item.start_time }} </td>
+                    <td> {{ item.end_time }} </td>
+                    <td> {{ item.user_name }} </td>
+                    <td> {{ item.topic }} </td>
                 </tr>
                 {% endif %}
                 {% toggle 'toggle_val' %}

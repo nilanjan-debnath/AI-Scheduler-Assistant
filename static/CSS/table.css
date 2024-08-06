@@ -9,13 +9,12 @@
   align-items: center;
   justify-content: center;
 }
-table, th, td {
-  /* border: 1px solid; */
+th, td {
   padding: 0.5rem;
 }
-tr {
-    border: 1px solid;
+table {
+  border: 0.125rem solid #CDE8E5;
 }
 #header {
-    background-color: #b0a695;
+    background-color: #7AB2B2;
 }

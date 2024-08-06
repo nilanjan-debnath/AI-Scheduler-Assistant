@@ -16,9 +16,10 @@
             {% endfor %}
         </div>
         <div id="chatInput">
+            <div id="profile"></div>
             <form action="/input" method="post">
                 {% csrf_token %}
-                <input id="text_input" type="text" name="input" autocomplete="off" required>
+                <textarea id="text_input" type="text" name="input" autocomplete="off" required></textarea>
                 <button id="send_button" type="submit">Send</button>
             </form>
         </div>

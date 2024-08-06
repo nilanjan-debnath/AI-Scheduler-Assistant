@@ -9,7 +9,7 @@ class Chat(models.Model):
 
 class Table(models.Model):
     date = models.DateField()
-    start = models.TimeField()
-    end = models.TimeField()
-    name = models.CharField(max_length=50)
-    subject = models.CharField(max_length=500)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    user_name = models.CharField(max_length=50)
+    topic = models.CharField(max_length=500)

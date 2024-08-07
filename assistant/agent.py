@@ -35,7 +35,7 @@ def agent(user_input):
     input = {
         "datetime":datetime.now(),
         "user":user_input,
-        # "history": list(Chat.objects.values('datetime', 'user', 'ai'))[-3:]
+        "history": list(Chat.objects.values('datetime', 'user', 'ai').order_by("datetime"))[-3:]
     }
     response = agent_executor.invoke({"input": input, "preamble": preamble})
     return response['output']

@@ -14,7 +14,7 @@ def history() -> list:
     Returns:
         list: each item in the list represent the user input and the presponse of ai on that user input
     """
-    chats = list(Chat.objects.values('datetime', 'user', 'ai'))
+    chats = list(Chat.objects.values('datetime', 'user', 'ai').order_by("datetime"))
     return chats
 
 history.name = "history"
@@ -28,7 +28,7 @@ def schedule_table() -> list:
     Returns:
         list: each item of the list is a schedule set by ai on request of user
     """
-    schedules = list(Table.objects.values('id','date','start_time','end_time','user_name','topic'))
+    schedules = list(Table.objects.values('id','date','start_time','end_time','user_name','topic').order_by("date", "start_time"))
     return schedules
 
 schedule_table.name = "schedule_table"

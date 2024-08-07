@@ -9,12 +9,13 @@
   align-items: center;
   justify-content: center;
 }
-th, td {
+th,
+td {
   padding: 0.5rem;
 }
 table {
-  border: 0.125rem solid #CDE8E5;
+  border: 0.125rem solid #cde8e5;
 }
 #header {
-    background-color: #7AB2B2;
+  background-color: #7ab2b2;
 }

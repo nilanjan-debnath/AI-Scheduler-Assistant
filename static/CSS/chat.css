@@ -1,6 +1,6 @@
 nav {
   height: 4rem;
-  background-color: #4D869C;
+  background-color: #4d869c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,14 +47,38 @@ nav > h2 {
   justify-content: end;
 }
 .user > pre {
-  background-color: #7AB2B2;
+  background-color: #7ab2b2;
 }
 .ai {
   justify-content: start;
 }
 .ai > pre {
-  background-color: #EEF7FF;
+  background-color: #eef7ff;
 }
+
+.loader {
+  width: 1.75rem;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 4) 50%;
+  animation: l3 1.75s infinite linear;
+}
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
 #chatInput {
   height: 5rem;
   width: 100%;
@@ -63,11 +87,11 @@ nav > h2 {
   align-items: center;
   justify-content: space-between;
 }
-#profile{
+#profile {
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background-color: #7AB2B2;
+  background-color: #7ab2b2;
 }
 #chatInput > form {
   padding: 0.5rem;
@@ -75,9 +99,9 @@ nav > h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid #7AB2B2;
+  border: 2px solid #7ab2b2;
   border-radius: 0.5rem;
-  background-color: #EEF7FF;
+  background-color: #eef7ff;
 }
 #text_input {
   padding: 0.5rem;
@@ -88,7 +112,7 @@ nav > h2 {
   overflow: auto;
   outline: none;
   scrollbar-width: none;
-  background-color: #EEF7FF;
+  background-color: #eef7ff;
 }
 #send_button {
   padding: 0.5rem;
@@ -96,5 +120,5 @@ nav > h2 {
   width: 6rem;
   border-radius: 0.5rem;
   border: 0;
-  background-color: #7AB2B2;
+  background-color: #7ab2b2;
 }

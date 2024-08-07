@@ -9,7 +9,7 @@ from .agent import agent
 
 def home(request):
     chats = Chat.objects.all().order_by("datetime")
-    items = Table.objects.all()
+    items = Table.objects.all().order_by("date", "start_time")
     return render(request, "base.html", {'chats':chats, 'items':items})
 
 def input(request):

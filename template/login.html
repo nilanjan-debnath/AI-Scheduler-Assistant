@@ -1,0 +1,51 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'CSS/login.css' %}">
+</head>
+<body>
+    <div id="loginContainer">
+        <div id="loginNav">
+            <div class="navTitle highlight" id="log">Login</div>
+            <div class="navTitle" id="reg">Register</div>
+        </div>
+        <div id="loginMain">
+            <div id="logForm" class="form">
+                <form class="loginForm" action="/login" method="post">
+                    {% csrf_token %}
+                    <div id="username" class="inputField">
+                        <input type="text" name="username" spellcheck="false" required>
+                        <label>Username</label>
+                    </div>
+                    <div id="password" class="inputField">
+                        <input type="password" name="password" spellcheck="false" required>
+                        <label>Password</label>
+                    </div>
+                    <button class="submit" id="loginButton" type="submit">Login</button>
+                </form>
+            </div>
+            <div id="regForm" class="form hide">
+                <form class="loginForm" action="/register" method="post">
+                    {% csrf_token %}
+                    <div id="username" class="inputField">
+                        <input type="text" name="username" spellcheck="false" autocomplete="off" required>
+                        <label>Username</label>
+                    </div>
+                    <div id="gmail" class="inputField">
+                        <input type="email" name="email" spellcheck="false" autocomplete="off" required>
+                        <label>Email</label>
+                    </div>
+                    <div id="password" class="inputField">
+                        <input type="password" name="password" spellcheck="false" autocomplete="off" required>
+                        <label>Password</label>
+                    </div>
+                    <div id="confirm_password" class="inputField">
+                        <input type="password" name="confirm_password" spellcheck="false" autocomplete="off" required>
+                        <label>Confirm Password</label>
+                    </div>
+                    <button class="submit" id="registerButton" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'JS/login.js' %}"></script>
+</body>

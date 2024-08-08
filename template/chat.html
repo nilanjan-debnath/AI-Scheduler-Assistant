@@ -10,20 +10,40 @@
         <div id="chatContainer">
             {% for chat in chats %}
             <div class="chat">
-                <div class="user chatText"><pre>{{chat.user}}</pre></div>
-                <div class="ai chatText"><pre>{{chat.ai}}</pre></div>
+                <div class="user chatText">
+                    <div class="uicon icon">{{ username | slice:":1" | capfirst }}</div>
+                    <pre>{{chat.user}}</pre>
+                </div>
+                <div class="ai chatText">
+                    <div class="aicon icon">
+                        <img src="{% static 'Images/favicon.png' %}" alt="ai" style="width: 1.5rem;">
+                    </div>
+                    <pre>{{chat.ai}}</pre>
+                </div>
             </div>
             {% endfor %}
         </div>
         <div id="chatInput">
-            <div id="profile"></div>
+            <div id="logout">
+                <form action="/logout" method="post">
+                    {% csrf_token %}
+                    <button id="logoutButton" type="submit">
+                        <img id="logoutIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO2ZzUpDMRCFA/UNFJfWRR9ACi4Vax/IhYg7l+JarHbnc7m40OpCEcUfsCIUPgmkbVAuFj0TGskHl+zmzMmdpNO5zhUKhcJCA6wA58ANMEaDj3MN9IGmZfId4A5bXoFdq523Tn7CPbCqNnAxDQ/D8DYaotgNYBsYRBo9RexYxNfohI40+EyjG2kM1MHjAyvZ+Zo38RE0RurgU6SBv+scA+9+zdKAGcXAnAAtYN+vuZ6BKsg8Au2cDWhNECEJWK/TDolrTaQy4AE2gIdI8gnYdLkYMDGR2oDcxE8GwvV3AByKn1Pg7c9nYg4D8e1hTVUM1JTQEXAifi5Dc2dbQtkfYjXkfI1i9ENW/foGWJBWomXS5qZq5lKBVTudCgz/0OwBV351OQKMTMYdqeAfjFXGCQZbS5aDrXi0uCUNPtPYsRwtfh3udsXDXZ+86XB3PczuU/AMrEkNBBN+12+Nk3/xOvLkIxPLwFkoI+UnJl8+PZOdLxQKBZeKT0N/DYy3hFMeAAAAAElFTkSuQmCC">
+                    </button>
+                </form>
+            </div>
+            <div id="profile">{{ username | slice:":1" | capfirst }}</div>
             <form id="myForm" action="/input" method="post">
                 {% csrf_token %}
-                <textarea id="text_input" type="text" name="input" autocomplete="off" required></textarea>
+                <textarea id="text_input" type="text" name="input" autocomplete="off" placeholder="Ask assistant to schedule you time "  required></textarea>
                 <button id="send_button" type="submit">Send</button>
             </form>
         </div>
+        {% if logedin == False %}
+        <div id="login">
+            {% include "login.html" %}
+        </div>
+        {% endif %}
     </div>
-    </main>
     <script src="{% static 'JS/chat.js' %}"></script>
 </body>

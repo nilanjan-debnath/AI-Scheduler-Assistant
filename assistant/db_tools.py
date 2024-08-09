@@ -5,6 +5,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 
 from datetime import datetime
 from .models import Chat, Table
+from django.contrib.auth.models import User
 
 @tool
 def history() -> list:
@@ -14,16 +15,30 @@ def history() -> list:
     Returns:
         list: each item in the list represent the user input and the presponse of ai on that user input
     """
-    chats = list(Chat.objects.values('datetime', 'user', 'ai').order_by("datetime"))
+    chats = list(Chat.objects.values('datetime', 'user_text', 'ai_text').order_by("datetime"))
     return chats
 
 history.name = "history"
 history.description = "All the conversation details between user and ai"
 
 @tool
-def schedule_table() -> list:
+def today_schedules() -> list:
     """
-    schedule details on the schedule table
+    Today's schedules' details
+    
+    Returns:
+        list: each item of the list is a schedule set by ai on request of user
+    """
+    schedules = list(Table.objects.filter(date=datetime.now().date()).values('id','date','start_time','end_time','user_name','topic').order_by("date", "start_time"))
+    return schedules
+
+today_schedules.name = "today_schedules"
+today_schedules.description = "schedule details of today"
+
+@tool
+def all_schedules() -> list:
+    """
+    All schedules' details
     
     Returns:
         list: each item of the list is a schedule set by ai on request of user
@@ -31,8 +46,8 @@ def schedule_table() -> list:
     schedules = list(Table.objects.values('id','date','start_time','end_time','user_name','topic').order_by("date", "start_time"))
     return schedules
 
-schedule_table.name = "schedule_table"
-schedule_table.description = "schedule details on schedule table"
+all_schedules.name = "all_schedules"
+all_schedules.description = "schedule details on schedule table"
 
 @tool
 def add_schedule(date_str: str, start_time_str: str, end_time_str: str, user_name: str, topic: str):
@@ -85,14 +100,18 @@ def update_schedule(id: int, date_str: str=None, start_time_str: str=None, end_t
         item = Table.objects.get(id=id)
     except Exception as e:
         return e
-    if date_str: date = datetime.strptime(date_str, '%Y-%m-%d').date()
-    else: date = item.date
-    if start_time_str: start_time = datetime.strptime(start_time_str, '%H:%M:%S').time()
-    else: start_time = item.start_time
-    if end_time_str: end_time = datetime.strptime(end_time_str, '%H:%M:%S').time()
-    else: end_time = item.end_time
-    if not user_name: user_name = item.user_name
-    if not topic: topic = item.topic
+
+    try:
+        if date_str: date = datetime.strptime(date_str, '%Y-%m-%d').date()
+        else: date = item.date
+        if start_time_str: start_time = datetime.strptime(start_time_str, '%H:%M:%S').time()
+        else: start_time = item.start_time
+        if end_time_str: end_time = datetime.strptime(end_time_str, '%H:%M:%S').time()
+        else: end_time = item.end_time
+        if not user_name: user_name = item.user_name
+        if not topic: topic = item.topic
+    except Exception as e:
+        return e
 
     try:
         item.date = date
@@ -140,20 +159,15 @@ delete_schedule.name = "delete_schedule"
 delete_schedule.description = "Tool to delete existing schedule on the schedule table"
 delete_schedule.args_schema = delete_schedule_inputs
 
-TOOLS = [history, schedule_table, add_schedule, update_schedule, delete_schedule]
-TOOLS_DETAILS = """
-You have multiple tools to see exixting schedules, add new schedules, update schedules and delete schedules. Date should be always follow this format '%Y-%m-%d' (e.g. '2024-08-07'). Time should be always follow this format '%H:%M:%S' (e.g. '14:30:00')
-Below are some instructions to use those tools.
+TOOLS = [history, today_schedules, all_schedules, add_schedule, update_schedule, delete_schedule]
+TOOLS_DETAILS = """**Tools at Your Disposal:**
+1. **today_schedules:** Provides details of all meetings scheduled for today.
+2. **all_schedules:** Lists all scheduled meetings.
+3. **add_schedule:** Use this tool to add a new meeting. Ensure all required information is confirmed before adding a schedule. No fields should be left blank.
+4. **update_schedule:** Update an existing meeting by referencing its ID using the 'all_schedules' tool. If some fields do not need changes, retain their previous values.
+5. **delete_schedule:** Delete an existing meeting by referencing its ID using the 'all_schedules' tool. Confirm with the user before deleting, as only one schedule can be deleted at a time. Ensure the ID exists before proceeding.
 
-schedule_table:
-to check schedules on the schedule table, use this tool, and make sure you don't mixup the ids of each schedules. Each have an unique one and it's auto added to the table. Use this id to make other operations on existing schedules.
-
-add_schedule:
-Don't let any field blank. Before calling this tool, confirm all the requirment info to add the scedule.
-
-update_schedule:
-To use this tool you need all the fields on the table, if all the fields aren't need to change then use the previous value of those fields.
-
-delete_schedule:
-id must be an integer, and check the id is exist on the sceduler table or not. You can't delete multiple items at once, you have to delete each item at a time. Confirm specificly before deleting any schedule from the user.
+**Formatting Requirements:**
+- **Date Format:** Dates should be in the format '%Y-%m-%d' (e.g., '2024-08-07').
+- **Time Format:** Times should follow the format '%H:%M:%S' (e.g., '14:30:00').
 """

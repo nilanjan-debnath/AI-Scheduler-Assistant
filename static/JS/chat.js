@@ -5,9 +5,19 @@ function scrollToBottom() {
 scrollToBottom();
 
 function addLoading(text) {
+  const user = document.getElementById("profile").innerText;
+  const favicon = document.querySelector('link[rel="shortcut icon"]').getAttribute('href');
   const html = `<div class="chat">
-        <div class="user chatText"><pre>${text}</pre></div>
-        <div class="ai chatText"><pre><div class="loader"></div></pre></div>
+        <div class="user chatText">
+        <div class="uicon icon">${user}</div>
+        <pre>${text}</pre>
+        </div>
+          <div class="ai chatText">
+          <div class="aicon icon">
+            <img src=${favicon} alt="ai" style="width: 1.5rem;">
+          </div>
+          <pre><div class="loader"></div></pre>
+        </div>
     </div>`;
   document.getElementById("chatContainer").innerHTML += html;
   scrollToBottom();

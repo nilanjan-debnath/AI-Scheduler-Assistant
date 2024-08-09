@@ -12,30 +12,34 @@
             <div class="chat">
                 <div class="user chatText">
                     <div class="uicon icon">{{ username | slice:":1" | capfirst }}</div>
-                    <pre>{{chat.user}}</pre>
+                    <pre>{{chat.user_text}}</pre>
                 </div>
                 <div class="ai chatText">
                     <div class="aicon icon">
                         <img src="{% static 'Images/favicon.png' %}" alt="ai" style="width: 1.5rem;">
                     </div>
-                    <pre>{{chat.ai}}</pre>
+                    <pre>{{ chat.ai_text }}</pre>
                 </div>
             </div>
             {% endfor %}
         </div>
         <div id="chatInput">
-            <div id="logout">
-                <form action="/logout" method="post">
-                    {% csrf_token %}
-                    <button id="logoutButton" type="submit">
-                        <img id="logoutIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABfUlEQVR4nO2ZzUpDMRCFA/UNFJfWRR9ACi4Vax/IhYg7l+JarHbnc7m40OpCEcUfsCIUPgmkbVAuFj0TGskHl+zmzMmdpNO5zhUKhcJCA6wA58ANMEaDj3MN9IGmZfId4A5bXoFdq523Tn7CPbCqNnAxDQ/D8DYaotgNYBsYRBo9RexYxNfohI40+EyjG2kM1MHjAyvZ+Zo38RE0RurgU6SBv+scA+9+zdKAGcXAnAAtYN+vuZ6BKsg8Au2cDWhNECEJWK/TDolrTaQy4AE2gIdI8gnYdLkYMDGR2oDcxE8GwvV3AByKn1Pg7c9nYg4D8e1hTVUM1JTQEXAifi5Dc2dbQtkfYjXkfI1i9ENW/foGWJBWomXS5qZq5lKBVTudCgz/0OwBV351OQKMTMYdqeAfjFXGCQZbS5aDrXi0uCUNPtPYsRwtfh3udsXDXZ+86XB3PczuU/AMrEkNBBN+12+Nk3/xOvLkIxPLwFkoI+UnJl8+PZOdLxQKBZeKT0N/DYy3hFMeAAAAAElFTkSuQmCC">
-                    </button>
-                </form>
+            <div id="profile">
+                <div id="logout">
+                    <form action="/logout" method="post">
+                        {% csrf_token %}
+                        <button id="logoutButton" type="submit">
+                            <svg id="logoutIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 rotate-90">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                {{ username | slice:":1" | capfirst }}
             </div>
-            <div id="profile">{{ username | slice:":1" | capfirst }}</div>
             <form id="myForm" action="/input" method="post">
                 {% csrf_token %}
-                <textarea id="text_input" type="text" name="input" autocomplete="off" placeholder="Ask assistant to schedule you time "  required></textarea>
+                <textarea id="text_input" type="text" name="input" autocomplete="off" placeholder="Talk to scheduler assistant"  required></textarea>
                 <button id="send_button" type="submit">Send</button>
             </form>
         </div>

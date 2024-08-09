@@ -114,30 +114,11 @@ nav > h2 {
   padding: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  position: relative;
-}
-#logout {
-  position: absolute;
-  top: -50%;
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-  background-color: #4D869C;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#logoutButton {
-  border: none;
-  background-color: transparent;
-}
-#logoutIcon {
-  height: 2rem;
+  justify-content: space-evenly;
 }
 #profile {
-  height: 3rem;
-  width: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
   border-radius: 50%;
   background-color: #4D869C;
   display: flex;
@@ -146,6 +127,7 @@ nav > h2 {
   font-size: 1.5rem;
   font-weight: 900;
   color: #EEF7FF;
+  position: relative;
 }
 #chatInput > form {
   padding: 0.5rem;
@@ -156,6 +138,31 @@ nav > h2 {
   border: 2px solid #7ab2b2;
   border-radius: 0.5rem;
   background-color: #eef7ff;
+}
+#logout {
+  position: absolute;
+  top: -125%;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: #4D869C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#logoutButton {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#logoutIcon {
+  height: 1.5rem;
+  color: #EEF7FF;
+  rotate: 90deg;
 }
 #text_input {
   padding: 0.5rem;

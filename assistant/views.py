@@ -15,15 +15,16 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     logedin = True
     username = request.user.username
-    chats = Chat.objects.all().order_by("datetime")
+    chats = Chat.objects.filter(user=request.user).order_by("datetime")
     items = Table.objects.all().order_by("date", "start_time")
     context = {'chats':chats, 'items':items, 'logedin': logedin, "username":username}
     return render(request, "base.html", context)
 
 def input(request):
+    username = request.user.username
     user_input = request.POST["input"]
-    ai_output = agent(user_input)
-    chat = Chat(user=user_input, ai=ai_output)
+    ai_output = agent(user_input, username)
+    chat = Chat(user_text=user_input, ai_text=ai_output, user=request.user)
     chat.save()
     return redirect("home")
 
@@ -38,9 +39,7 @@ def login_page(request):
 def user_login(request):
     username=request.POST['username']
     password=request.POST['password']
-    print(username, password)
     user=authenticate(request,username=username,password=password)
-    print("ok")
     if user is not None:
         login(request, user)
         return redirect('home')

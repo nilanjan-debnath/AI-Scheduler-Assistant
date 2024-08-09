@@ -6,3 +6,4 @@ register = template.Library()
 def toggle(context, var_name):
     context[var_name] = not context.get(var_name, True)
     return ''
+

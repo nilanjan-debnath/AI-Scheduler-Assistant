@@ -21,9 +21,9 @@ def home(request):
     return render(request, "base.html", context)
 
 def input(request):
-    username = request.user.username
+    user = request.user
     user_input = request.POST["input"]
-    ai_output = agent(user_input, username)
+    ai_output = agent(user_input, user)
     chat = Chat(user_text=user_input, ai_text=ai_output, user=request.user)
     chat.save()
     return redirect("home")

@@ -20,7 +20,14 @@
                         <input type="password" name="password" spellcheck="false" required>
                         <label>Password</label>
                     </div>
-                    <button class="submit" id="loginButton" type="submit">Login</button>
+                    <button class="button" id="loginButton" type="submit">Login</button>
+                </form>
+                <form class="loginForm" action="/guest" method="post" style="gap: 0.25rem;">
+                    {% csrf_token %}
+                    <div class="warning">
+                        *Guest is a public account, conversations in guest account is public to everyone.
+                    </div>
+                    <button class="button" id="GuestButton" type="submit">Login as Guest</button>
                 </form>
             </div>
             <div id="regForm" class="form hide">
@@ -42,8 +49,11 @@
                         <input type="password" name="confirm_password" spellcheck="false" autocomplete="off" required>
                         <label>Confirm Password</label>
                     </div>
-                    <button class="submit" id="registerButton" type="submit">Register</button>
+                    <button class="button" id="registerButton" type="submit">Register</button>
                 </form>
+            </div>
+            <div class="msg">
+                {{ msg }}
             </div>
         </div>
     </div>

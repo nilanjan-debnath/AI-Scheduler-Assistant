@@ -39,9 +39,8 @@ def agent(user_input, user):
 
 **User Information:**
 - **Current Date and Time:** {now}
-- **Current User ID:** {user.id}
 - **Current User Name:** {user.username}
-- **Last Three Conversations:** {history}
+- **Last two Conversations:** {history}
     
 {db_tools.TOOLS_DETAILS}
 

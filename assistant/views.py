@@ -10,9 +10,12 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+msg = ""
 
 @login_required(login_url='login')
 def home(request):
+    global msg
+    msg = ""
     logedin = True
     username = request.user.username
     chats = Chat.objects.filter(user=request.user).order_by("datetime")
@@ -20,6 +23,7 @@ def home(request):
     context = {'chats':chats, 'items':items, 'logedin': logedin, "username":username}
     return render(request, "base.html", context)
 
+@login_required(login_url='login')
 def input(request):
     user = request.user
     user_input = request.POST["input"]
@@ -29,11 +33,23 @@ def input(request):
     return redirect("home")
 
 def login_page(request):
+    global msg
     logedin = False
-    chats = Chat.objects.all().order_by("datetime")
+    chats = Chat.objects.filter(user__username="Guest").order_by("datetime")
     items = Table.objects.all().order_by("date", "start_time")
-    context = {'chats':chats, 'items':items, 'logedin': logedin}
+    context = {'chats':chats, 'items':items, 'logedin': logedin,"msg": msg}
     return render(request, "base.html", context)
+
+@require_http_methods(["POST"])
+def guest_login(request):
+    user=authenticate(request,username="Guest",password="Guest@2024")
+    if user is not None:
+        login(request, user)
+        return redirect('home')
+    else:
+        global msg
+        msg = "Something went wrong ⚠"
+        return redirect("login")
 
 @require_http_methods(["POST"])
 def user_login(request):
@@ -44,24 +60,24 @@ def user_login(request):
         login(request, user)
         return redirect('home')
     else:
-        logedin = False
-        chats = Chat.objects.all().order_by("datetime")
-        items = Table.objects.all().order_by("date", "start_time")
-        contex = {'chats':chats, 'items':items, 'logedin': logedin,"msg": "Username or Password is incorrect 🚫"}
-        return render(request, "base.html", contex)
+        global msg
+        msg = "Username or Password is incorrect 🚫"
+        return redirect("login")
 
 def user_regiser(request):
     username=request.POST['username']
     email=request.POST['email']
     password=request.POST['password']
-    user=User.objects.create_user(username, email, password)
-    user.save()
-    logedin = False
-    chats = Chat.objects.all().order_by("datetime")
-    items = Table.objects.all().order_by("date", "start_time")
-    contex = {'chats':chats, 'items':items, 'logedin': logedin, "msg": "Registration successful ✅"}
-    return render(request, "base.html", contex)
-
+    global msg
+    try:
+        user=User.objects.create_user(username, email, password)
+        user.save()
+        msg = "Registration successful ✅"
+        return redirect("login")
+    except:
+        msg = "Username already taken 🚫"
+        return redirect("login")
+        
 def user_logout(request):
     logout(request)
     return redirect('home')

@@ -85,6 +85,10 @@ nav > h2 {
   background-color: #eef7ff;
 }
 
+pre {
+  font-family: monospace;
+}
+
 .loader {
   width: 1.75rem;
   aspect-ratio: 2;
@@ -174,6 +178,7 @@ nav > h2 {
   outline: none;
   scrollbar-width: none;
   background-color: #eef7ff;
+  font-family: monospace;
 }
 #send_button {
   padding: 0.5rem;

@@ -12,6 +12,7 @@
 th,
 td {
   padding: 0.5rem;
+  /* font-family: monospace; */
 }
 table {
   border: 0.125rem solid #cde8e5;

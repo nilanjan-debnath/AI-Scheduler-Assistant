@@ -75,7 +75,7 @@ input:valid ~ label {
   top: -25%;
   background-color: #7ab2b2;
 }
-.submit {
+.button {
   width: 10rem;
   height: 2rem;
   border-radius: 0.5rem;
@@ -88,6 +88,23 @@ input:valid ~ label {
   align-items: center;
   transition: 0.5s;
 }
-.submit:hover {
+.button:hover {
   background-color: #4d869c;
+}
+
+.msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eef7ff;
+}
+
+.warning {
+  width: 15rem;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #eef7ff;
+  font-size: .75rem;
 }

@@ -1,1 +1,1 @@
-pip install django dj-database-url python-dotenv langchain langchain_core langchain_cohere psycopg2
+pip install django dj-database-url python-dotenv langchain langchain_core langchain_cohere psycopg2-binary

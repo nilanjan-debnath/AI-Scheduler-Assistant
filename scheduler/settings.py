@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+os.environ['DEBUG'] = os.getenv('DEBUG')
 os.environ['DB_URL'] = os.getenv('DB_URL')
 os.environ['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
@@ -15,10 +16,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true' 
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ".onrender.com"]
 
@@ -69,7 +70,7 @@ WSGI_APPLICATION = 'scheduler.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DB_URL = os.environ['DB_URL']
+DB_URL = os.environ.get('DB_URL')
 DATABASES = {'default': dj_database_url.config(default=DB_URL)}
 
 # Password validation
